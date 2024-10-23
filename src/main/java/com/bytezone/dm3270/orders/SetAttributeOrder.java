@@ -15,7 +15,7 @@ public class SetAttributeOrder extends Order {
     Optional<Attribute> opt =
         Attribute.getAttribute(buffer[offset + 1], buffer[offset + 2]);
     assert opt.isPresent();
-    attribute = opt.get();
+    attribute = opt.orElse(null);
 
     this.buffer = new byte[3];
     System.arraycopy(buffer, offset, this.buffer, 0, this.buffer.length);
@@ -27,8 +27,10 @@ public class SetAttributeOrder extends Order {
 
   @Override
   public void process(DisplayScreen screen) {
-    Pen pen = screen.getPen();
-    pen.addAttribute(attribute);
+    if (attribute != null) {
+      Pen pen = screen.getPen();
+      pen.addAttribute(attribute);
+    }
   }
 
   @Override
