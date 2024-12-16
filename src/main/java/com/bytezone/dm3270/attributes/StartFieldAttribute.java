@@ -13,10 +13,9 @@ public class StartFieldAttribute extends Attribute {
 
   private final boolean isProtected;      // bit 2
   private final boolean isNumeric;        // bit 3
-  private final boolean isModified;       // bit 7
+  private boolean isModified;       // bit 7
 
   private boolean isExtended;         // created by StartFieldExtendedOrder
-  private boolean userModified;       // used to avoid altering the original bit 7
 
   // these three fields are stored in two bits (4&5)
   private final boolean isHidden;
@@ -57,11 +56,11 @@ public class StartFieldAttribute extends Attribute {
   }
 
   public boolean isModified() {
-    return isModified || userModified;
+    return isModified;
   }
 
   public void setModified(boolean modified) {
-    userModified = modified;
+    this.isModified = modified;
   }
 
   public boolean isIntensified() {

@@ -315,7 +315,7 @@ public class Screen implements DisplayScreen {
   }
 
   public void resetModified() {
-    fieldManager.getUnprotectedFields().forEach(f -> f.setModified(false));
+    fieldManager.getFields().forEach(f -> f.setModified(false));
   }
 
   public boolean isKeyboardLocked() {
