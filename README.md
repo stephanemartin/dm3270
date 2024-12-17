@@ -15,7 +15,7 @@ To use the emulator as maven dependency include in `pom.xml`:
   <dependency>
       <groupId>com.github.stephanemartin</groupId>
       <artifactId>dm3270</artifactId>
-      <version>0.17-SNAPSHOT</version>
+      <version>0.17.1</version>
   </dependency>
 ```
 
