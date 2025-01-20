@@ -13,6 +13,18 @@ public final class KeyboardStatusChangedEvent {
     this.keyName = keyName;
   }
 
+  public boolean isKeyboardLocked() {
+    return keyboardLocked;
+  }
+
+  public boolean isInsertMode() {
+    return insertMode;
+  }
+
+  public String getKeyName() {
+    return keyName;
+  }
+
   @Override
   public String toString() {
     return String.format("Keyboard locked ... %s%n", keyboardLocked)
