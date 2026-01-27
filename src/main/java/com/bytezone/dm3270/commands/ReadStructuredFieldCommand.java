@@ -101,13 +101,14 @@ public class ReadStructuredFieldCommand extends Command {
   }
 
   private static List<QueryReplyField> buildAvailableReplyFields(TelnetState telnetState) {
-    ScreenDimensions screenDimensions = telnetState.getSecondary();
+    final ScreenDimensions screenDimensions = telnetState.getSecondary();
+
     return Arrays.asList(new UsableArea(screenDimensions.rows, screenDimensions.columns),
         new Color(),
         new Highlight(),
         new ImplicitPartition(screenDimensions.rows, screenDimensions.columns),
         new ReplyModes(),
-        new CharacterSets()
+        new CharacterSets(telnetState.getCharset())
         );
   }
 

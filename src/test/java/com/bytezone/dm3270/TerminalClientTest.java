@@ -192,12 +192,12 @@ public class TerminalClientTest {
   public void shouldGetWelcomeScreenWithRightCharset() throws Exception {
     cleanShutdown();
     startServiceWithFlow(LOGIN_SPECIAL_CHARACTERS_FLOW);
-    client = new TerminalClient(TERMINAL_MODEL_TYPE_THREE, SCREEN_DIMENSIONS, Charset.CP1147);
+    client = new TerminalClient(TERMINAL_MODEL_TYPE_THREE, SCREEN_DIMENSIONS, Charset.CP1047);
     client.setUsesExtended3270(true);
     connectClient();
     awaitKeyboardUnlock();
     assertThat(getScreenText())
-        .isEqualTo(getFileContent("login-special-character-charset-CP1147.txt"));
+        .isEqualTo(getFileContent("login-special-character-charset-CP1047.txt"));
   }
 
   private void cleanShutdown() throws Exception {

@@ -4,9 +4,63 @@ import com.bytezone.dm3270.buffers.Buffer;
 import java.nio.charset.UnsupportedCharsetException;
 
 public enum Charset {
+  CP037,
+  CP273,
+  CP277,
+  CP278,
+  CP280,
+  CP284,
+  CP285,
+  CP297,
+  CP420,
+  CP424,
+  CP437,
+  CP500,
+  CP737,
+  CP775,
+  CP838,
+  CP850,
+  CP852,
+  CP855,
+  CP857,
+  CP860,
+  CP861,
+  CP862,
+  CP863,
+  CP864,
+  CP865,
+  CP866,
+  CP868,
+  CP869,
+  CP870,
+  CP871,
+  CP874,
+  CP875,
+  CP918,
+  CP921,
+  CP922,
+  CP930,
+  CP933,
+  CP935,
+  CP937,
+  CP939,
+  CP942,
+  CP943,
+  CP948,
+  CP949,
+  CP950,
+  CP964,
+  CP970,
+  CP1006,
   CP1025,
   CP1026,
+  CP1046,
   CP1047,
+  CP1097,
+  CP1098,
+  CP1112,
+  CP1122,
+  CP1123,
   CP1140,
   CP1141,
   CP1142,
@@ -17,17 +71,19 @@ public enum Charset {
   CP1147,
   CP1148,
   CP1149,
-  CP1153,
-  CP1154,
   CP1166,
-  CP1377,
-  CP850,
-  CP870,
-  CP930,
-  CP931,
-  CP935,
-  CP937,
-  CP939;
+  CP1250,
+  CP1251,
+  CP1252,
+  CP1253,
+  CP1254,
+  CP1255,
+  CP1256,
+  CP1257,
+  CP1258,
+  CP1381,
+  CP1383,
+  CP33722;
 
   private char[] charsMapping;
   private java.nio.charset.Charset charset;
@@ -56,6 +112,18 @@ public enum Charset {
     return new String(buffer,
         offset + length > buffer.length ? buffer.length - offset - 1 : offset,
         length, charset);
+  }
+
+  public byte[] getCode() {
+    final byte[] bytes = new byte[2];
+    try {
+      final int i = Integer.parseInt(name().substring(2));
+      bytes[1] = (byte) i;
+      bytes[0] = (byte) (i >>> 8);
+    } catch (NumberFormatException e) {
+      throw new IllegalStateException("Invalid charset name: " + name());
+    }
+    return bytes;
   }
 
   public String toHex(byte[] b) {
