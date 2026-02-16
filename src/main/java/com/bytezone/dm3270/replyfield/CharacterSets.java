@@ -1,5 +1,6 @@
 package com.bytezone.dm3270.replyfield;
 
+import com.bytezone.dm3270.Charset;
 import com.bytezone.dm3270.buffers.Buffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,8 @@ public class CharacterSets extends QueryReplyField {
   private static final int DEFAULT_CHARACTER_SLOT_HEIGHT = 12;
   private static final int[] FORM_TYPES = {0x00, 0x00, 0x00, 0x00};
   private static final int DESCRIPTOR_LENGTH = 7;
-  private static final byte[][] CHARSETS = new byte[][]{
-      {0x00, 0x00, 0x00, 0x02, (byte) 0xB9, 0x00, 0x25},
+  private final byte[][] charSets = new byte[][]{
+      {0x00, 0x00, 0x00, 0x02, (byte) 0xB9,  0x04, 0x17},
       {0x01, 0x00, (byte) 0xF1, 0x03, (byte) 0xC3, 0x01, 0x36}
   };
 
@@ -25,10 +26,13 @@ public class CharacterSets extends QueryReplyField {
   private int descriptorLength;
   private final List<Descriptor> descriptors = new ArrayList<>();
 
-  public CharacterSets() {
+  public CharacterSets(final Charset cs) {
     super(CHARACTER_SETS_REPLY);
+    final byte[] code = cs.getCode();
+    charSets[0][5] = code[0];
+    charSets[0][6] = code[1];
 
-    int ptr = createReply(4 + FORM_TYPES.length + 1 + CHARSETS.length * DESCRIPTOR_LENGTH);
+    int ptr = createReply(4 + FORM_TYPES.length + 1 + charSets.length * DESCRIPTOR_LENGTH);
     reply[ptr++] = (byte) (GRAPHIC_ESCAPE_SUPPORT_FLAG | CGCSGID_PRESENT_FLAG & 0xff);
     reply[ptr++] = 0x00;
     reply[ptr++] = DEFAULT_CHARACTER_SLOT_WIDTH;
@@ -37,7 +41,7 @@ public class CharacterSets extends QueryReplyField {
       reply[ptr++] = (byte) formType;
     }
     reply[ptr++] = DESCRIPTOR_LENGTH;
-    for (byte[] charset : CHARSETS) {
+    for (byte[] charset : charSets) {
       System.arraycopy(charset, 0, reply, ptr, DESCRIPTOR_LENGTH);
       ptr += DESCRIPTOR_LENGTH;
     }

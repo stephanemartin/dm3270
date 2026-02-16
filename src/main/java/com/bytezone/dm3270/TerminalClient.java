@@ -46,6 +46,7 @@ public class TerminalClient {
     charset.load();
     TelnetState telnetState = new TelnetState();
     telnetState.setDoDeviceType(model);
+    telnetState.setCharset(charset);
     screen = new Screen(new ScreenDimensions(24, 80), alternateScreenDimensions, telnetState,
         charset);
     connectionListenerBroadcast = new ConnectionListenerBroadcast();

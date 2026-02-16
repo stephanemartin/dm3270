@@ -1,5 +1,6 @@
 package com.bytezone.dm3270.streams;
 
+import com.bytezone.dm3270.Charset;
 import com.bytezone.dm3270.display.ScreenDimensions;
 import com.bytezone.dm3270.telnet.TN3270ExtendedSubcommand;
 import java.util.List;
@@ -41,6 +42,7 @@ public class TelnetState implements Runnable {
   private Thread thread;
 
   private ScreenDimensions secondary = new ScreenDimensions(24, 80);
+  private Charset charset;
 
   public TelnetState() {
     setDo3270Extended(true);       // prefer extended
@@ -60,6 +62,14 @@ public class TelnetState implements Runnable {
 
   public void setLastAccess() {
     lastAccess.set(System.currentTimeMillis());
+  }
+
+  public void setCharset(final Charset charset) {
+    this.charset = charset;
+  }
+
+  public Charset getCharset() {
+    return charset;
   }
 
   public void write(byte[] buffer) {

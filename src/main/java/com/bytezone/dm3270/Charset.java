@@ -58,6 +58,18 @@ public enum Charset {
         length, charset);
   }
 
+  public byte[] getCode() {
+    final byte[] bytes = new byte[2];
+    try {
+      final int i = Integer.parseInt(name().substring(2));
+      bytes[1] = (byte) i;
+      bytes[0] = (byte) (i >>> 8);
+    } catch (NumberFormatException e) {
+      throw new IllegalStateException("Invalid charset name: " + name());
+    }
+    return bytes;
+  }
+
   public String toHex(byte[] b) {
     return toHex(b, 0, b.length);
   }
