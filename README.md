@@ -13,7 +13,7 @@ To use the emulator as maven dependency include in `pom.xml`:
 
 ```xml
   <dependency>
-      <groupId>com.github.stephanemartin</groupId>
+      <groupId>io.github.stephanemartin</groupId>
       <artifactId>dm3270</artifactId>
       <version>0.17.3</version>
   </dependency>
