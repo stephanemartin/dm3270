@@ -28,8 +28,8 @@ jobs:
           server-password: MAVEN_PASSWORD
       - name: Build with Maven
         run: |
-          if [ ${{ github.ref == 'refs/heads/master' }} ]; then
-            mvn --batch-mode -Pcentral -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} --update-snapshots deploy
+          if ${{ github.ref == 'refs/heads/master' }}; then
+            mvn --batch-mode -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} --update-snapshots deploy
           else
             mvn --batch-mode -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} --update-snapshots package
           fi
