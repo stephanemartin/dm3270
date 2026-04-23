@@ -5,7 +5,7 @@
 
   <groupId>io.github.stephanemartin</groupId>
   <artifactId>dm3270-lib</artifactId>
-  <version>0.17.4-SNAPSHOT</version>
+  <version>0.17.4</version>
 
   <name>${project.artifactId}</name>
   <description>
@@ -142,6 +142,22 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.10.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>stephanemartin-central</publishingServerId>
+          <autoPublish>true</autoPublish>
+        </configuration>
+        <executions>
+          <execution>
+            <id>publish</id>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -154,34 +170,8 @@
             <useSystemClassLoader>false</useSystemClassLoader>
           </configuration>
         </plugin>
+
       </plugins>
     </pluginManagement>
   </build>
-  
-  <profiles>
-    <profile>
-      <id>central</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.sonatype.central</groupId>
-            <artifactId>central-publishing-maven-plugin</artifactId>
-            <version>0.10.0</version>
-            <extensions>true</extensions>
-            <configuration>
-              <publishingServerId>stephanemartin-central</publishingServerId>
-              <autoPublish>true</autoPublish>
-            </configuration>
-            <executions>
-              <execution>
-                <id>publish</id>
-                <phase>deploy</phase>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
 </project>
