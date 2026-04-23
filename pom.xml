@@ -85,22 +85,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.sonatype.central</groupId>
-        <artifactId>central-publishing-maven-plugin</artifactId>
-        <version>0.10.0</version>
-        <extensions>true</extensions>
-        <configuration>
-          <publishingServerId>stephanemartin-central</publishingServerId>
-          <autoPublish>true</autoPublish>
-        </configuration>
-        <executions>
-          <execution>
-              <id>publish</id>
-              <phase>deploy</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
         <version>3.2.8</version>
@@ -178,20 +162,22 @@
   
   <profiles>
     <profile>
-      <id>release</id>
+      <id>central</id>
       <build>
         <plugins>
-
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.1</version>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+            <version>0.10.0</version>
+            <extensions>true</extensions>
+            <configuration>
+              <publishingServerId>stephanemartin-central</publishingServerId>
+              <autoPublish>true</autoPublish>
+            </configuration>
             <executions>
               <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
+                <id>publish</id>
+                <phase>deploy</phase>
               </execution>
             </executions>
           </plugin>
